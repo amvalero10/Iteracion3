@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
 import vos.Menu;
+import vos.Postre;
 
 @Path("restaurantesus/{idRestaurantesus: \\d+}/menus")
 public class MenuService 
@@ -36,6 +37,45 @@ public class MenuService
 	private String doErrorMessage(Exception e){
 		return "{ \"ERROR\": \""+ e.getMessage() + "\"}" ;
 	}
+	
+	
+	
+	
+	
+	@GET
+//	@Path( "{id: \\d+}" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+//	public Response getMenu( @PathParam( "id" ) Long id,@PathParam("idRestaurantesus") Long idRestaurantesus ) throws Exception
+	public Response getMenu( @PathParam("idRestaurantesus") Long idRestaurantesus ) throws Exception
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		if (tm.buscarRestauranteUsPorId(idRestaurantesus) != null) 
+		{
+		try
+		{
+			Menu m = tm.buscarMenuPorIdRestaurante(idRestaurantesus);		
+			return Response.status( 200 ).entity( m ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+		}
+		else
+		{
+			throw new Exception("No tiene permisos para acceder a estos recursos");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
