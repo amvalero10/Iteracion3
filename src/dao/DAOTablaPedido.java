@@ -79,7 +79,9 @@ public class DAOTablaPedido {
 			Long idBebida = rs.getLong("ID_BEBIDA");
 			Long idPostre = rs.getLong("ID_POSTRE");
 			Long fecha = rs.getLong("FECHA");
-			pedidos.add(new Pedido(id, idUsuario, mesa, costo, idEntrada, idAcomp, idPlato, idBebida, idPostre, fecha));
+			String estado = rs.getString("ESTADO");
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			pedidos.add(new Pedido(id, idUsuario, mesa, costo, idEntrada, idAcomp, idPlato, idBebida, idPostre, fecha, estado, idRestaurante));
 		}
 		return pedidos;
 	}
@@ -112,7 +114,9 @@ public class DAOTablaPedido {
 			Long idBebida = rs.getLong("ID_BEBIDA");
 			Long idPostre = rs.getLong("ID_POSTRE");
 			Long fecha = rs.getLong("FECHA");
-			pedido = new Pedido(id2, idUsuario, mesa, costo, idEntrada, idAcomp, idPlato, idBebida, idPostre, fecha);
+			String estado = rs.getString("ESTADO");
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			pedido = new Pedido(id2, idUsuario, mesa, costo, idEntrada, idAcomp, idPlato, idBebida, idPostre, fecha, estado, idRestaurante);
 		}
 
 		return pedido;
@@ -138,7 +142,9 @@ public class DAOTablaPedido {
 		sql += pedido.getIdPlato() + ",";
 		sql += pedido.getIdBebida() + ",";
 		sql += pedido.getIdPostre() + ",";
-		sql += pedido.getFecha() + ")";
+		sql += pedido.getFecha() + ",'";
+		sql += pedido.getEstado() + "',";
+		sql += pedido.getIdRestaurante() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -166,7 +172,9 @@ public class DAOTablaPedido {
 		sql += "ID_PLATO=" + pedido.getIdPlato()+ ",";
 		sql += "ID_BEBIDA=" + pedido.getIdBebida()+ ",";
 		sql += "ID_POSTRE=" + pedido.getIdPostre()+ ",";
-		sql += "FECHA=" + pedido.getFecha();
+		sql += "FECHA=" + pedido.getFecha()+ ",";
+		sql += "ESTADO='" + pedido.getEstado()+ "',";
+		sql += "ID_RESTAURANTE" + pedido.getIdRestaurante();
 		sql += " WHERE ID = " + pedido.getId();
 
 
