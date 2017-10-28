@@ -68,9 +68,10 @@ public class DAOTablaPostre {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			Integer numeroVendidos = rs.getInt("NUMERO_VENDIDOS");
 			String traduccion = rs.getString("TRADUCCION");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
 			
-			Postre entr = new Postre(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion);
+			Postre entr = new Postre(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion,equivalencia);
 			postres.add(entr);
 		}
 		return postres;
@@ -104,9 +105,10 @@ public class DAOTablaPostre {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			Integer numeroVendidos = rs.getInt("NUMERO_VENDIDOS");
 			String traduccion = rs.getString("TRADUCCION");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
 			
-			Postre entr = new Postre(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion);
+			Postre entr = new Postre(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion, equivalencia);
 			postres.add(entr);
 		
 		}
@@ -142,9 +144,10 @@ public class DAOTablaPostre {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			Integer numeroVendidos = rs.getInt("NUMERO_VENDIDOS");
 			String traduccion = rs.getString("TRADUCCION");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
 			
-			postre = new Postre(id2, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion);	
+			postre = new Postre(id2, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion,equivalencia);	
 		}
 
 		return postre;
@@ -176,7 +179,8 @@ public class DAOTablaPostre {
 		sql += postre.getTipo()+ "','";
 		sql += postre.getDescripcion()+ "',";
 		sql += postre.getNumeroVendidos()+ ",'";
-		sql += postre.getTraduccion()+ "')";
+		sql += postre.getTraduccion()+ "','";
+		sql += postre.getEquivalencia() + "')";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -207,7 +211,8 @@ public class DAOTablaPostre {
 		sql += "TIEMPO_PREP=" + postre.getTiempoPrep()+ ",";
 		sql += "PRECIO_PROD=" + postre.getPrecioProd()+ ",";
 		sql += "NUMERO_VENDIDOS=" + postre.getNumeroVendidos()+ ",";
-		sql += "TRADUCCION='" + postre.getTraduccion() + "'";
+		sql += "TRADUCCION='" + postre.getTraduccion() + "',";
+		sql += "EQUIVALENCIA='" + postre.getEquivalencia() + "'";
 		sql += " WHERE ID = " + postre.getId();
 
 

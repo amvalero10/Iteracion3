@@ -86,9 +86,10 @@ public class DAOTablaRestaurante {
 			String tipo = rs.getString("TIPO");
 			String paginaWeb = rs.getString("PAGINA_WEB");
 			String representante = rs.getString("REPRESENTANTE");
+			Integer capacidadMax = rs.getInt("CAPACIDADMAX");
 
 			
-			restaurantes.add(new Restaurante(id, nombre, cuentaBancaria, personalizable, descripcion, tipo, paginaWeb,representante));		
+			restaurantes.add(new Restaurante(id, nombre, cuentaBancaria, personalizable, descripcion, tipo, paginaWeb,representante, capacidadMax));		
 		}
 		return restaurantes;
 	}
@@ -122,8 +123,9 @@ public class DAOTablaRestaurante {
 			String tipo = rs.getString("TIPO");
 			String paginaWeb = rs.getString("PAGINA_WEB");
 			String representante = rs.getString("REPRESENTANTE");
+			Integer capacidadMax = rs.getInt("CAPACIDADMAX");
 			
-			restaurantes.add(new Restaurante(id, nombre, cuentaBancaria, personalizable, descripcion, tipo, paginaWeb, representante));		
+			restaurantes.add(new Restaurante(id, nombre, cuentaBancaria, personalizable, descripcion, tipo, paginaWeb, representante,capacidadMax));		
 
 		}
 
@@ -160,7 +162,9 @@ public class DAOTablaRestaurante {
 			String tipo = rs.getString("TIPO");
 			String paginaWeb = rs.getString("PAGINA_WEB");
 			String representante = rs.getString("REPRESENTANTE");
-			restaurante = new Restaurante(id2, nombre, cuentaBancaria, personalizable, descripcion, tipo, paginaWeb,representante);		
+			Integer capacidadMax = rs.getInt("CAPACIDADMAX");
+			
+			restaurante = new Restaurante(id2, nombre, cuentaBancaria, personalizable, descripcion, tipo, paginaWeb,representante,capacidadMax);		
 		}
 		return restaurante;
 	}
@@ -191,7 +195,8 @@ public class DAOTablaRestaurante {
 		sql += restaurante.getDescripcion()+ "','";
 		sql += restaurante.getTipo()+ "','";
 		sql += restaurante.getPaginaWeb()+ "','";
-		sql += restaurante.getRepresentante()+ "')";
+		sql += restaurante.getRepresentante()+ "',";
+		sql += restaurante.getCapacidadMax()+")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -224,6 +229,7 @@ public class DAOTablaRestaurante {
 		sql += "TIPO='" + restaurante.getTipo() + "',";
 		sql += "PAGINA_WEB='" + restaurante.getPaginaWeb() + "',";
 		sql += "REPRESENTANTE='" + restaurante.getRepresentante() + "'";
+		sql += "CAPACIDADMAX=" +  restaurante.getCapacidadMax()+" ";
 
 		sql += " WHERE ID = " + restaurante.getId();
 

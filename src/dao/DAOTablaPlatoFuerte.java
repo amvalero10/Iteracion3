@@ -65,9 +65,10 @@ public class DAOTablaPlatoFuerte {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			Integer numeroVendidos = rs.getInt("NUMERO_VENDIDOS");
 			String traduccion = rs.getString("TRADUCCION");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
 			
-			PlatoFuerte plf = new PlatoFuerte(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion);
+			PlatoFuerte plf = new PlatoFuerte(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion,equivalencia);
 			platosFuertes.add(plf);
 		}
 		return platosFuertes;
@@ -101,9 +102,10 @@ public class DAOTablaPlatoFuerte {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			Integer numeroVendidos = rs.getInt("NUMERO_VENDIDOS");
 			String traduccion = rs.getString("TRADUCCION");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
 			
-			PlatoFuerte plf = new PlatoFuerte(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion);
+			PlatoFuerte plf = new PlatoFuerte(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion,equivalencia);
 			platosFuertes.add(plf);
 		
 		}
@@ -139,9 +141,9 @@ public class DAOTablaPlatoFuerte {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			Integer numeroVendidos = rs.getInt("NUMERO_VENDIDOS");
 			String traduccion = rs.getString("TRADUCCION");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
-			
-			platoFuerte = new PlatoFuerte(id2, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion);	
+			platoFuerte = new PlatoFuerte(id2, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion,equivalencia);	
 		}
 
 		return platoFuerte;
@@ -173,7 +175,8 @@ public class DAOTablaPlatoFuerte {
 		sql += platoFuerte.getTipo()+ "','";
 		sql += platoFuerte.getDescripcion()+ "',";
 		sql += platoFuerte.getNumeroVendidos()+ ",'";
-		sql += platoFuerte.getTraduccion()+ "')";
+		sql += platoFuerte.getTraduccion()+ "','";
+		sql += platoFuerte.getEquivalencia() + "')";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -204,7 +207,8 @@ public class DAOTablaPlatoFuerte {
 		sql += "TIEMPO_PREP=" + platoFuerte.getTiempoPrep()+ ",";
 		sql += "PRECIO_PROD=" + platoFuerte.getPrecioProd()+ ",";
 		sql += "NUMERO_VENDIDOS=" + platoFuerte.getNumeroVendidos()+ ",";
-		sql += "TRADUCCION='" + platoFuerte.getTraduccion() + "'";
+		sql += "TRADUCCION='" + platoFuerte.getTraduccion() + "',";
+		sql += "EQUIVALENCIA='" + platoFuerte.getEquivalencia() + "'";
 		sql += " WHERE ID = " + platoFuerte.getId();
 
 

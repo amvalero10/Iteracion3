@@ -31,10 +31,13 @@ public class Ingrediente {
 	@JsonProperty(value="alimentoAsc")
 	private String alimentoAsc;
 	
+	@JsonProperty(value="equivalencia")
+	private String equivalencia;
+	
 	public Ingrediente(@JsonProperty(value="id")Long id,@JsonProperty(value="nombre")String nombre,
 			@JsonProperty(value="tipo")String tipo, @JsonProperty(value="descripcionEsp")String descripcionEsp,
 			@JsonProperty(value="descripcionIng")String descripcionIng,@JsonProperty(value="traduccion")String traduccion,
-			@JsonProperty(value="alimentoAsc")String alimentoAsc)
+			@JsonProperty(value="alimentoAsc")String alimentoAsc, @JsonProperty(value="equivalencia")String equivalencia)
 	{
 		super();
 		this.id = id;
@@ -44,7 +47,7 @@ public class Ingrediente {
 		this.descripcionIng = descripcionIng;
 		this.traduccion = traduccion;
 		this.alimentoAsc = alimentoAsc;
-		
+		this.equivalencia = equivalencia;
 	}
 
 	public Long getId() {
@@ -96,6 +99,14 @@ public class Ingrediente {
 
 	public void setAlimentoAsc(String alimentoAsc) {
 		this.alimentoAsc = alimentoAsc;
+	}
+
+	public String getEquivalencia() {
+		return equivalencia;
+	}
+
+	public void setEquivalencia(String equivalencia) {
+		this.equivalencia = equivalencia;
 	}
 	
 	

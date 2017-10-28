@@ -35,10 +35,13 @@ public class Restaurante {
 	@JsonProperty(value="representante")
 	private String representante;
 	
+	@JsonProperty(value="capacidadMax")
+	private Integer capacidadMax;
+	
 	
 	public Restaurante(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="cuentaBancaria")Long cuentaBancaria,
 			@JsonProperty(value="personalizable")Boolean personalizable,@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="tipo")String tipo,
-			@JsonProperty(value="paginaWeb")String paginaWeb,@JsonProperty(value="representante")String representante ){
+			@JsonProperty(value="paginaWeb")String paginaWeb,@JsonProperty(value="representante")String representante,@JsonProperty(value="capacidadMax")Integer capacidadMax  ){
 		
 		super();
 		this.id = id;
@@ -49,6 +52,7 @@ public class Restaurante {
 		this.tipo = tipo;
 		this.paginaWeb = paginaWeb;	
 		this.representante = representante;
+		this.capacidadMax = capacidadMax;
 		
 	}
 
@@ -116,6 +120,14 @@ public class Restaurante {
 
 	public void setRepresentante(String representante) {
 		this.representante = representante;
+	}
+
+
+	public Integer getCapacidadMax() {
+		return capacidadMax;
+	}
+	public void setCapacidadMax(Integer capacidadMax) {
+		this.capacidadMax = capacidadMax;
 	}
 	
 	

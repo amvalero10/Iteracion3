@@ -58,11 +58,9 @@ public class DAOTablaIngrediente {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			String traduccion = rs.getString("TRADUCCION");
 			String alimentoAsc = rs.getString("ALIMENTOASC");
-
-
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
-			
-			Ingrediente entr = new Ingrediente(id, nombre, tipo, descripcionEsp, descripcionIng,traduccion,alimentoAsc);
+			Ingrediente entr = new Ingrediente(id, nombre, tipo, descripcionEsp, descripcionIng,traduccion,alimentoAsc,equivalencia);
 			ingredientes.add(entr);
 		}
 		return ingredientes;
@@ -89,9 +87,9 @@ public class DAOTablaIngrediente {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			String traduccion = rs.getString("TRADUCCION");
 			String alimentoAsc = rs.getString("ALIMENTOASC");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
-			
-			Ingrediente entr = new Ingrediente(id, nombre, tipo, descripcionEsp, descripcionIng, traduccion,alimentoAsc);
+			Ingrediente entr = new Ingrediente(id, nombre, tipo, descripcionEsp, descripcionIng, traduccion,alimentoAsc,equivalencia);
 			ingredientes.add(entr);
 		
 		}
@@ -120,8 +118,9 @@ public class DAOTablaIngrediente {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			String traduccion = rs.getString("TRADUCCION");
 			String alimentoAsc = rs.getString("ALIMENTOASC");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
-			ingrediente = new Ingrediente(id2, nombre, tipo, descripcionEsp, descripcionIng,traduccion,alimentoAsc);
+			ingrediente = new Ingrediente(id2, nombre, tipo, descripcionEsp, descripcionIng,traduccion,alimentoAsc,equivalencia);
 			
 		}
 
@@ -140,7 +139,8 @@ public class DAOTablaIngrediente {
 		sql += ingrediente.getDescripcionEsp() + "','";
 		sql += ingrediente.getDescripcionIng() + "','";
 		sql += ingrediente.getTraduccion() + "','" ;
-		sql += ingrediente.getAlimentoAsc() + "')";
+		sql += ingrediente.getAlimentoAsc() + "','";
+		sql += ingrediente.getEquivalencia() + "')";
 		
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -160,7 +160,8 @@ public class DAOTablaIngrediente {
 		sql += "DESCRIPCION_ESP='" + ingrediente.getDescripcionEsp() + "',";
 		sql += "DESCRIPCION_ING='" + ingrediente.getDescripcionIng() + "',";
 		sql += "TRADUCCION='" + ingrediente.getTraduccion()+ "',";
-		sql += "ALIMENTOASC='" + ingrediente.getAlimentoAsc()+ "'";
+		sql += "ALIMENTOASC='" + ingrediente.getAlimentoAsc()+ "',";
+		sql += "EQUIVALENCIA='"+ ingrediente.getEquivalencia()+ "'";
 
 
 		sql += " WHERE ID = " + ingrediente.getId();

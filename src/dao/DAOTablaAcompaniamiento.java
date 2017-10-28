@@ -67,9 +67,10 @@ public class DAOTablaAcompaniamiento {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			Integer numeroVendidos = rs.getInt("NUMERO_VENDIDOS");
 			String traduccion = rs.getString("TRADUCCION");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
 			
-			Acompaniamiento entr = new Acompaniamiento(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion);
+			Acompaniamiento entr = new Acompaniamiento(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion,equivalencia);
 			acompaniamientos.add(entr);
 		}
 		return acompaniamientos;
@@ -103,9 +104,10 @@ public class DAOTablaAcompaniamiento {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			Integer numeroVendidos = rs.getInt("NUMERO_VENDIDOS");
 			String traduccion = rs.getString("TRADUCCION");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
 			
-			Acompaniamiento entr = new Acompaniamiento(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion);
+			Acompaniamiento entr = new Acompaniamiento(id, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion,equivalencia);
 			acompaniamientos.add(entr);
 		
 		}
@@ -141,9 +143,10 @@ public class DAOTablaAcompaniamiento {
 			String descripcionIng = rs.getString("DESCRIPCION_ING");
 			Integer numeroVendidos = rs.getInt("NUMERO_VENDIDOS");
 			String traduccion = rs.getString("TRADUCCION");
+			String equivalencia = rs.getString("EQUIVALENCIA");
 			
 			
-			acompaniamiento = new Acompaniamiento(id2, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion);	
+			acompaniamiento = new Acompaniamiento(id2, nombre, cantidad, personalizable, precioVenta, restaurante, categoria, descripcion, tiempoPrep, precioProd, tipo, descripcionIng, numeroVendidos, traduccion, equivalencia);	
 		}
 
 		return acompaniamiento;
@@ -175,7 +178,8 @@ public class DAOTablaAcompaniamiento {
 		sql += acompanimiento.getTipo()+ "','";
 		sql += acompanimiento.getDescripcion()+ "',";
 		sql += acompanimiento.getNumeroVendidos()+ ",'";
-		sql += acompanimiento.getTraduccion()+ "')";
+		sql += acompanimiento.getTraduccion()+ "','";
+		sql += acompanimiento.getEquivalencia() + "')";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -206,7 +210,8 @@ public class DAOTablaAcompaniamiento {
 		sql += "TIEMPO_PREP=" + acompaniamiento.getTiempoPrep()+ ",";
 		sql += "PRECIO_PROD=" + acompaniamiento.getPrecioProd()+ ",";
 		sql += "NUMERO_VENDIDOS=" + acompaniamiento.getNumeroVendidos()+ ",";
-		sql += "TRADUCCION='" + acompaniamiento.getTraduccion() + "'";
+		sql += "TRADUCCION='" + acompaniamiento.getTraduccion() + "',";
+		sql += "EQUIVALENCIA='" + acompaniamiento.getEquivalencia() + "'";
 		sql += " WHERE ID = " + acompaniamiento.getId();
 
 

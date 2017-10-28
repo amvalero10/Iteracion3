@@ -53,10 +53,13 @@ public abstract class AbstractAlimento {
 	@JsonProperty(value="traduccion")
 	private String traduccion;
 	
+	@JsonProperty(value="equivalencia")
+	private String equivalencia;
+	
 	
 	public AbstractAlimento(@JsonProperty(value="id")Long id,@JsonProperty(value="nombre")String nombre,@JsonProperty(value="cantidad")Integer cantidad,@JsonProperty(value="personalizable")Boolean personalizable,
 			@JsonProperty(value="precioVenta")Double precioVenta,@JsonProperty(value="restaurante")String restaurante, @JsonProperty(value="categoria")String categoria, @JsonProperty(value="descripcion")String descripcion, @JsonProperty(value="tiempoPrep")Integer tiempoPrep, @JsonProperty(value="precioProd")Double precioProd, @JsonProperty(value="tipo")String tipo,
-		@JsonProperty(value="descripcionIng")String descripcionIng, @JsonProperty(value="numeroVendidos")Integer numeroVendidos, @JsonProperty(value="traduccion")String traduccion)
+		@JsonProperty(value="descripcionIng")String descripcionIng, @JsonProperty(value="numeroVendidos")Integer numeroVendidos, @JsonProperty(value="traduccion")String traduccion, @JsonProperty(value="equivalencia")String equivalencia)
 	{
 		super();
 		setId(id);
@@ -73,6 +76,7 @@ public abstract class AbstractAlimento {
 		setDescripcionIng(descripcionIng);
 		setNumeroVendidos(numeroVendidos);
 		setTraduccion(traduccion);	
+		setEquivalencia(equivalencia);
 	}
 	
 	
@@ -185,6 +189,14 @@ public abstract class AbstractAlimento {
 	}
 	public void setTraduccion(String traduccion) {
 		this.traduccion = traduccion;
+	}
+
+
+	public String getEquivalencia() {
+		return equivalencia;
+	}
+	public void setEquivalencia(String equivalencia) {
+		this.equivalencia = equivalencia;
 	}
 
 
