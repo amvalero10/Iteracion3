@@ -34,6 +34,7 @@ import dao.DAOTablaAdministradorUs;
 import dao.DAOTablaBebida;
 import dao.DAOTablaClientePreferencia;
 import dao.DAOTablaClienteUs;
+import dao.DAOTablaEquivalencias;
 import dao.DAOTablaEventos;
 import dao.DAOTablaIngrediente;
 import dao.DAOTablaMenu;
@@ -2248,6 +2249,283 @@ public class RotondAndesTM {
 				}
 			}
 		}
+		
+		public ArrayList<Entrada> addEquivalenciaEntrada(Long id, Long id1,Long id2) throws Exception {
+			ArrayList<Entrada> entradas = new ArrayList<>();
+			Entrada entrada;
+			RestauranteUs restaurante;
+			DAOTablaEquivalencias daoEquivalencias = new DAOTablaEquivalencias();
+			DAOTablaEntrada daoEntrada = new DAOTablaEntrada();
+			DAOTablaRestauranteUs daoClienteUs = new DAOTablaRestauranteUs();
+			try 
+			{
+				//////transaccion
+				this.conn = darConexion();
+				daoEquivalencias.setConn(conn);
+				daoEntrada.setConn(conn);
+				daoClienteUs.setConn(conn);
+				daoClienteUs.buscarRestauranteUsPorId(id);
+				entrada = daoEntrada.buscarEntradaPorId(id1);
+				entradas.add(entrada);
+				entrada = daoEntrada.buscarEntradaPorId(id2);
+				entradas.add(entrada);
+				daoEquivalencias.addEquivalenciaEntrada(id1, id2);
+				conn.commit();
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoClienteUs.cerrarRecursos();
+					daoEntrada.cerrarRecursos();
+					daoEquivalencias.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+			return entradas;
+		}
+
+		public ArrayList<Acompaniamiento> addEquivalenciaAcomp(Long id, Long id1,Long id2) throws Exception {
+			ArrayList<Acompaniamiento> acomps = new ArrayList<>();
+			Acompaniamiento acomp;
+			RestauranteUs restaurante;
+			DAOTablaEquivalencias daoEquivalencias = new DAOTablaEquivalencias();
+			DAOTablaAcompaniamiento daoAcomp = new DAOTablaAcompaniamiento();
+			DAOTablaRestauranteUs daoClienteUs = new DAOTablaRestauranteUs();
+			try 
+			{
+				//////transaccion
+				this.conn = darConexion();
+				daoEquivalencias.setConn(conn);
+				daoAcomp.setConn(conn);
+				daoClienteUs.setConn(conn);
+				daoClienteUs.buscarRestauranteUsPorId(id);
+				acomp = daoAcomp.buscarAcompaniamientoPorId(id1);
+				acomps.add(acomp);
+				acomp = daoAcomp.buscarAcompaniamientoPorId(id2);
+				acomps.add(acomp);
+				daoEquivalencias.addEquivalenciaAcomp(id1, id2);
+				conn.commit();
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoClienteUs.cerrarRecursos();
+					daoAcomp.cerrarRecursos();
+					daoEquivalencias.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+			return acomps;
+		}
+
+		public ArrayList<Bebida> addEquivalenciaBebida(Long id, Long id1,Long id2) throws Exception {
+			ArrayList<Bebida> bebidas = new ArrayList<>();
+			Bebida bebida;
+			RestauranteUs restaurante;
+			DAOTablaEquivalencias daoEquivalencias = new DAOTablaEquivalencias();
+			DAOTablaBebida daoBebida = new DAOTablaBebida();
+			DAOTablaRestauranteUs daoClienteUs = new DAOTablaRestauranteUs();
+			try 
+			{
+				//////transaccion
+				this.conn = darConexion();
+				daoEquivalencias.setConn(conn);
+				daoBebida.setConn(conn);
+				daoClienteUs.setConn(conn);
+				daoClienteUs.buscarRestauranteUsPorId(id);
+				bebida = daoBebida.buscarBebidaPorId(id1);
+				bebidas.add(bebida);
+				bebida = daoBebida.buscarBebidaPorId(id2);
+				bebidas.add(bebida);
+				daoEquivalencias.addEquivalenciaBebida(id1, id2);
+				conn.commit();
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoClienteUs.cerrarRecursos();
+					daoBebida.cerrarRecursos();
+					daoEquivalencias.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+			return bebidas;
+		}
+
+		public ArrayList<PlatoFuerte> addEquivalenciaPlato(Long id, Long id1,Long id2) throws Exception {
+			ArrayList<PlatoFuerte> platos = new ArrayList<>();
+			PlatoFuerte plato;
+			RestauranteUs restaurante;
+			DAOTablaEquivalencias daoEquivalencias = new DAOTablaEquivalencias();
+			DAOTablaPlatoFuerte daoPlato = new DAOTablaPlatoFuerte();
+			DAOTablaRestauranteUs daoClienteUs = new DAOTablaRestauranteUs();
+			try 
+			{
+				//////transaccion
+				this.conn = darConexion();
+				daoEquivalencias.setConn(conn);
+				daoPlato.setConn(conn);
+				daoClienteUs.setConn(conn);
+				daoClienteUs.buscarRestauranteUsPorId(id);
+				plato = daoPlato.buscarPlatoFuertePorId(id1);
+				platos.add(plato);
+				plato = daoPlato.buscarPlatoFuertePorId(id2);
+				platos.add(plato);
+				daoEquivalencias.addEquivalenciaPlato(id1, id2);
+				conn.commit();
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoClienteUs.cerrarRecursos();
+					daoPlato.cerrarRecursos();
+					daoEquivalencias.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+			return platos;
+		}
+
+		public ArrayList<Postre> addEquivalenciaPostre(Long id, Long id1,Long id2) throws Exception {
+			ArrayList<Postre> postres = new ArrayList<>();
+			Postre postre;
+			RestauranteUs restaurante;
+			DAOTablaEquivalencias daoEquivalencias = new DAOTablaEquivalencias();
+			DAOTablaPostre daoPostre = new DAOTablaPostre();
+			DAOTablaRestauranteUs daoClienteUs = new DAOTablaRestauranteUs();
+			try 
+			{
+				//////transaccion
+				this.conn = darConexion();
+				daoEquivalencias.setConn(conn);
+				daoPostre.setConn(conn);
+				daoClienteUs.setConn(conn);
+				daoClienteUs.buscarRestauranteUsPorId(id);
+				postre = daoPostre.buscarPostrePorId(id1);
+				postres.add(postre);
+				postre = daoPostre.buscarPostrePorId(id2);
+				postres.add(postre);
+				daoEquivalencias.addEquivalenciaPostre(id1, id2);
+				conn.commit();
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoClienteUs.cerrarRecursos();
+					daoPostre.cerrarRecursos();
+					daoEquivalencias.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+			return postres;
+		}
+
+		public ArrayList<Ingrediente> addEquivalenciaIng(Long id, Long id1,Long id2) throws Exception {
+			ArrayList<Ingrediente> ings = new ArrayList<>();
+			Ingrediente ing;
+			RestauranteUs restaurante;
+			DAOTablaEquivalencias daoEquivalencias = new DAOTablaEquivalencias();
+			DAOTablaIngrediente daoIng = new DAOTablaIngrediente();
+			DAOTablaRestauranteUs daoClienteUs = new DAOTablaRestauranteUs();
+			try 
+			{
+				//////transaccion
+				this.conn = darConexion();
+				daoEquivalencias.setConn(conn);
+				daoIng.setConn(conn);
+				daoClienteUs.setConn(conn);
+				daoClienteUs.buscarRestauranteUsPorId(id);
+				ing = daoIng.buscarIngredientePorId(id1);
+				ings.add(ing);
+				ing = daoIng.buscarIngredientePorId(id2);
+				ings.add(ing);
+				daoEquivalencias.addEquivalenciaIngrediente(id1, id2);
+				conn.commit();
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoClienteUs.cerrarRecursos();
+					daoIng.cerrarRecursos();
+					daoEquivalencias.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+			return ings;
+		}
+
 		
 		/**
 		 * Metodo que modela la transaccion que agrega los videos que entran como parametro a la base de datos.

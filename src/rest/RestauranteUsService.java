@@ -17,6 +17,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.Acompaniamiento;
+import vos.Bebida;
+import vos.Entrada;
+import vos.Ingrediente;
+import vos.PlatoFuerte;
+import vos.Postre;
 import vos.RestauranteUs;
 
 
@@ -128,6 +134,102 @@ public class RestauranteUsService {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
 		return Response.status(200).entity(restaurante).build();
+	}
+	
+	@POST
+	@Path( "{id: \\d+}"+"/entrada/"+"{id1: \\d+}/"+ "{id2: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addEquivalenciaEntrada(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {			
+			List<Entrada> entradas = tm.addEquivalenciaEntrada(id, id1, id2);
+			return Response.status( 200 ).entity( entradas ).build( );	
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		
+	}
+	
+	@POST
+	@Path( "{id: \\d+}"+"/bebida/"+"{id1: \\d+}/"+ "{id2: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addEquivalenciaBebida(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {			
+			List<Bebida> bebidas = tm.addEquivalenciaBebida(id, id1, id2);
+			return Response.status( 200 ).entity( bebidas ).build( );	
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		
+	}
+	
+	@POST
+	@Path( "{id: \\d+}"+"/postre/"+"{id1: \\d+}/"+ "{id2: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addEquivalenciaPostre(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {			
+			List<Postre> postres = tm.addEquivalenciaPostre(id, id1, id2);
+			return Response.status( 200 ).entity( postres ).build( );	
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		
+	}
+	
+	@POST
+	@Path( "{id: \\d+}"+"/acompaniamiento/"+"{id1: \\d+}/"+ "{id2: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addEquivalenciaAcomp(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {			
+			List<Acompaniamiento> acomps = tm.addEquivalenciaAcomp(id, id1, id2);
+			return Response.status( 200 ).entity( acomps ).build( );	
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		
+	}
+	
+	@POST
+	@Path( "{id: \\d+}"+"/platofuerte/"+"{id1: \\d+}/"+ "{id2: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addEquivalenciaPlato(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {			
+			List<PlatoFuerte> platos = tm.addEquivalenciaPlato(id, id1, id2);
+			return Response.status( 200 ).entity( platos ).build( );	
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		
+	}
+	
+	@POST
+	@Path( "{id: \\d+}"+"/ingrediente/"+"{id1: \\d+}/"+ "{id2: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addEquivalenciaIng(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {			
+			List<Ingrediente> ings = tm.addEquivalenciaIng(id, id1, id2);
+			return Response.status( 200 ).entity( ings ).build( );	
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		
 	}
 	
     /**
