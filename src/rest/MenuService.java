@@ -18,105 +18,69 @@ import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
 import vos.Menu;
+import vos.Postre;
 
 @Path("restaurantesus/{idRestaurantesus: \\d+}/menus")
 public class MenuService 
 {
 	
 	
-//	@Context
-//	private ServletContext context;
-//	
-//	
-//	private String getPath() {
-//		return context.getRealPath("WEB-INF/ConnectionData");
-//	}
-//	
-//	
-//	private String doErrorMessage(Exception e){
-//		return "{ \"ERROR\": \""+ e.getMessage() + "\"}" ;
-//	}
-//	
-//	
-//	
-//	
-//	@GET
-//	@Produces({ MediaType.APPLICATION_JSON })
-//	public Response getMenus(@PathParam("idRestaurantesus") Long idRestaurantesus) throws Exception {
-//		RotondAndesTM tm = new RotondAndesTM(getPath());
-//		if (tm.buscarRestauranteUsPorId(idRestaurantesus) != null) 
-//		{
-//		List<Menu> menus;
-//		try {
-//			menus = tm.darMenus();
-//		} catch (Exception e) {
-//			return Response.status(500).entity(doErrorMessage(e)).build();
-//		}
-//		return Response.status(200).entity(menus).build();
-//		}
-//		else
-//		{
-//			throw new Exception("No tiene permisos para acceder a estos recursos");
-//		}
-//	}
-//	
-//	
-//	
-//	
-//
-//	
-//	
-//	@GET
-//	@Path( "{id: \\\\d+}" )
-//	@Produces( { MediaType.APPLICATION_JSON } )
-//	public Response getEntradaName( @PathParam( "id" ) Long id,@PathParam("idRestaurantesus") Long idRestaurantesus) throws Exception {
-//		RotondAndesTM tm = new RotondAndesTM(getPath());
-//		if (tm.buscarRestauranteUsPorId(idRestaurantesus) != null) 
-//		{
-//		List<Menu> menus;
-//		try {
-//			
-//			menus = tm.buscarMenuPorRestauranteID(id);
-//			
-//		} catch (Exception e) {
-//			return Response.status(500).entity(doErrorMessage(e)).build();
-//		}
-//		return Response.status(200).entity(menus).build();
-//		}
-//		else
-//		{
-//			throw new Exception("No tiene permisos para acceder a estos recursos");
-//		}
-//	}
-//	
-//	
-//	
-//	
-//	@POST
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response addMenu(Menu menu,@PathParam("idRestaurantesus") Long idRestaurantesus) throws Exception {
-//		RotondAndesTM tm = new RotondAndesTM(getPath());
-//		if (tm.buscarRestauranteUsPorId(idRestaurantesus) != null) 
-//		{
-//		try {
-//			tm.addMenu(menu);
-//		} catch (Exception e) {
-//			return Response.status(500).entity(doErrorMessage(e)).build();
-//		}
-//		return Response.status(200).entity(menu).build();
-//		}
-//		else
-//		{
-//			throw new Exception("No tiene permisos para acceder a estos recursos");
-//		}
-//	}
-//	
-//	
-//	
-//
-//
-//	
+	@Context
+	private ServletContext context;
+	
+	
+	private String getPath() {
+		return context.getRealPath("WEB-INF/ConnectionData");
+	}
+	
+	
+	private String doErrorMessage(Exception e){
+		return "{ \"ERROR\": \""+ e.getMessage() + "\"}" ;
+	}
+	
+	
+	
+	
+	
+	@GET
+//	@Path( "{id: \\d+}" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+//	public Response getMenu( @PathParam( "id" ) Long id,@PathParam("idRestaurantesus") Long idRestaurantesus ) throws Exception
+	public Response getMenu( @PathParam("idRestaurantesus") Long idRestaurantesus ) throws Exception
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		if (tm.buscarRestauranteUsPorId(idRestaurantesus) != null) 
+		{
+		try
+		{
+			Menu m = tm.buscarMenuPorIdRestaurante(idRestaurantesus);		
+			return Response.status( 200 ).entity( m ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+		}
+		else
+		{
+			throw new Exception("No tiene permisos para acceder a estos recursos");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 //	@DELETE
 //	@Consumes(MediaType.APPLICATION_JSON)
 //	@Produces(MediaType.APPLICATION_JSON)
@@ -136,7 +100,6 @@ public class MenuService
 //			throw new Exception("No tiene permisos para acceder a estos recursos");
 //		}
 //	}
-//	
 
 	
 	

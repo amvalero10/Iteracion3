@@ -5,9 +5,12 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import dao.DAOTablaEntrada;
 import dao.DAOTablaRestaurante;
@@ -4269,9 +4272,69 @@ public class RotondAndesTM {
 		
 		
 		
+		///////////
+		///Menu
+		////////////
 		
 		
 		
+		public Menu buscarMenuPorIdRestaurante(Long id) throws Exception {
+			Menu menus = null;
+			DAOTablaMenu daoMenu = new DAOTablaMenu();
+			
+			try 
+			{
+				//////transaccion
+				this.conn = darConexion();
+				daoMenu.setConn(conn);
+				
+				ArrayList<Acompaniamiento> acompaniamientos = daoMenu.darAcompaniamientosRestauranteId(id);
+				ArrayList<Bebida> bebidas = daoMenu.darBebidasRestauranteId(id);
+				ArrayList<Entrada> entradas = daoMenu.darEntradasRestauranteId(id);
+				ArrayList<PlatoFuerte> platoFuertes = daoMenu.darPlatoFuertesRestauranteId(id);
+				ArrayList<Postre> postres = daoMenu.darPostresRestauranteId(id);
+
+
+				menus = new Menu(id, acompaniamientos, bebidas, entradas, platoFuertes, postres);
+				
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoMenu.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+			return menus;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 		
 		
 		
