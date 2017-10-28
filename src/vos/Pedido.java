@@ -34,10 +34,17 @@ public class Pedido {
 	@JsonProperty(value="fecha")
 	private long fecha;
 	
+	@JsonProperty(value="estado")
+	private String estado;
+	
+	@JsonProperty(value="idRestaurante")
+	private long idRestaurante;
+	
 	public Pedido(@JsonProperty(value="id")long id, @JsonProperty(value="idUsuario")long idUsuario,
 			@JsonProperty(value="mesa")int mesa, @JsonProperty(value="costo")double costo, @JsonProperty(value="idEntrada")long idEntrada,
 			@JsonProperty(value="idAcomp")long idAcomp, @JsonProperty(value="idPlato")long idPlato, @JsonProperty(value="idBebida")long idBebida,
-			@JsonProperty(value="idPostre")long idPostre, @JsonProperty(value="fecha")long fecha){
+			@JsonProperty(value="idPostre")long idPostre, @JsonProperty(value="fecha")long fecha,
+			@JsonProperty(value="estado")String estado, @JsonProperty(value="idRestaurante")long idRestaurante){
 		setId(id);
 		setIdUsuario(idUsuario);
 		setMesa(mesa);
@@ -48,6 +55,8 @@ public class Pedido {
 		setIdBebida(idBebida);
 		setIdPostre(idPostre);
 		setFecha(fecha);
+		setEstado(estado);
+		setIdRestaurante(idRestaurante);
 	}
 
 	/**
@@ -188,5 +197,33 @@ public class Pedido {
 	 */
 	public void setFecha(long fecha) {
 		this.fecha = fecha;
+	}
+
+	/**
+	 * @return the estado
+	 */
+	public String getEstado() {
+		return estado;
+	}
+
+	/**
+	 * @param estado the estado to set
+	 */
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	/**
+	 * @return the idRestaurante
+	 */
+	public long getIdRestaurante() {
+		return idRestaurante;
+	}
+
+	/**
+	 * @param idRestaurante the idRestaurante to set
+	 */
+	public void setIdRestaurante(long idRestaurante) {
+		this.idRestaurante = idRestaurante;
 	}
 }
