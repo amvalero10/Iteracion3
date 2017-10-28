@@ -2,8 +2,11 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import vos.Pedido;
 
 public class DAOTablaEquivalencias {
 	
@@ -168,5 +171,96 @@ public class DAOTablaEquivalencias {
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+	
+	public boolean tieneEquivalenciaEntradaPorId(Long id1, Long id2) throws SQLException, Exception 
+	{
+		
+		String sql = "SELECT * FROM EQUIV_ENTRADA WHERE ID1 =" + id1;
+		sql += " AND ID2 =" + id2;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+		
+		if(rs.next()) {
+			
+			return true;
+		}
+
+		return false;
+	}
+	
+	public boolean tieneEquivalenciaBebidaPorId(Long id1, Long id2) throws SQLException, Exception 
+	{
+		
+		String sql = "SELECT * FROM EQUIV_BEBIDA WHERE ID1 =" + id1;
+		sql += " AND ID2 =" + id2;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+		
+		if(rs.next()) {
+			
+			return true;
+		}
+
+		return false;
+	}
+	
+	public boolean tieneEquivalenciaPostrePorId(Long id1, Long id2) throws SQLException, Exception 
+	{
+		
+		String sql = "SELECT * FROM EQUIV_POSTRE WHERE ID1 =" + id1;
+		sql += " AND ID2 =" + id2;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+		
+		if(rs.next()) {
+			
+			return true;
+		}
+
+		return false;
+	}
+	
+	public boolean tieneEquivalenciaAcompPorId(Long id1, Long id2) throws SQLException, Exception 
+	{
+		
+		String sql = "SELECT * FROM EQUIV_ACOMP WHERE ID1 =" + id1;
+		sql += " AND ID2 =" + id2;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+		
+		if(rs.next()) {
+			
+			return true;
+		}
+
+		return false;
+	}
+	
+	public boolean tieneEquivalenciaPlatoPorId(Long id1, Long id2) throws SQLException, Exception 
+	{
+		
+		String sql = "SELECT * FROM EQUIV_PLATO WHERE ID1 =" + id1;
+		sql += " AND ID2 =" + id2;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+		
+		if(rs.next()) {
+			
+			return true;
+		}
+
+		return false;
+	}
+
 
 }
