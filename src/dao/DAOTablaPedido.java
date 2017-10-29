@@ -204,6 +204,28 @@ public class DAOTablaPedido {
 	
 	
 	
+	//RF16 - indexar pedidos
+	public ArrayList<Long> indexIDPedido()throws SQLException, Exception  {
+		
+		ArrayList<Long> ids = new ArrayList<>();
+						
+		String sql = "SELECT ID FROM PEDIDO ORDER BY ID ASC";
+		
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		if(rs.next()) {
+			Long id2 = rs.getLong("ID");
+			ids.add(id2);		
+		}	
+		return ids;		
+	}
+	
+	
+	
+	
+	
 	
 	
 }

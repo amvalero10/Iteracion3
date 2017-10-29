@@ -4518,6 +4518,88 @@ public class RotondAndesTM {
 		
 		
 		
+		//RF16
+		public void updatePedidosClientes(ArrayList<Pedido> pedidos) throws Exception {
+			DAOTablaPedido daoP = new DAOTablaPedido();
+			
+			try 
+			{
+				//////transaccion
+				this.conn = darConexion();
+				daoP.setConn(conn);
+			
+			Iterator<Pedido> iterPedidos = pedidos.iterator();
+			while(iterPedidos.hasNext()) {
+				
+				Pedido pedidoActual = iterPedidos.next();
+				
+				Long id = pedidoActual.getId();
+				Long idUsuario = pedidoActual.getIdUsuario();
+				Integer mesa = pedidoActual.getMesa();
+				Double costo = pedidoActual.getCosto();
+				Long idEntrada = pedidoActual.getIdEntrada();
+				Long idAcompani = pedidoActual.getIdAcomp();
+				Long idPlato = pedidoActual.getIdPlato();
+				Long idBebida = pedidoActual.getIdBebida();
+				Long idPostre = pedidoActual.getIdPostre();
+				Long fecha = pedidoActual.getFecha();
+				String estado = pedidoActual.getEstado();
+				Long idRestaurante = pedidoActual.getIdRestaurante();
+				
+				
+ //Actualizo las cantidades de los productos y agrego el pedido				
+						//costo Final
+						Double entradaCos = buscarEntradaPorId(idEntrada).getPrecioProd();
+						Double acompCos = buscarAcompaniamientoPorId(idAcompani).getPrecioProd();
+						Double platoCos = buscarPlatoFuerteId(idPlato).getPrecioProd();
+						Double bebCos = buscarBebidaPorId(idBebida).getPrecioProd();
+						Double postreCos = buscarPostreId(idPostre).getPrecioProd();
+						Double costoFinal = entradaCos+acompCos+platoCos+bebCos+postreCos;
+						
+						Pedido pedidoF = new Pedido(id, idUsuario, mesa, costoFinal, idEntrada, idAcompani, idPlato, idBebida, idPostre, fecha, "SERVIDO", idRestaurante);
+						addPedido(pedidoF);
+						
+						Entrada entradaAct = new Entrada(idEntrada, null, 1, null, null, null, null, null, null, null, null, null, null, null, null);
+						updateEntradaCantidad(entradaAct);
+						
+						Acompaniamiento acompAct = new Acompaniamiento(idAcompani, null, 1, null, null, null, null, null, null, null, null, null, null, null, null);
+						updateAcompaniemientoCantidad(acompAct);
+						
+						PlatoFuerte platoFAct = new PlatoFuerte(idPlato, null, 1, null, null, null, null, null, null, null, null, null, null, null, null);
+						updateplatoFuerteCantidad(platoFAct);
+						
+						Bebida bebidaAct =  new Bebida(idBebida, null, 1, null, null, null, null, null, null, null, null, null, null, null, null);
+						updateBebidaCantidad(bebidaAct);
+						
+						Postre postreAct = new Postre(idPostre, null, 1, null, null, null, null, null, null, null, null, null, null, null, null);
+						updatePostreCantidad(postreAct);						
+			
+				}
+			}
+		catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoP.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+		}
+		
+		
+		
+		
 		
 		
 		
