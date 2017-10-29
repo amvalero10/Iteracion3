@@ -20,6 +20,7 @@ import vos.Restaurante;
 import vos.Acompaniamiento;
 import vos.AdministradorUs;
 import vos.Bebida;
+import vos.CancelarPedido;
 import vos.ClienteUs;
 import vos.Evento;
 import vos.Ingrediente;
@@ -4599,8 +4600,367 @@ public class RotondAndesTM {
 		
 		
 		
+		//////////
+		//RF17
+		//////////
+		public void cancelarPedidoPostre(CancelarPedido cancelarPedido) throws Exception {
+			
+			DAOTablaPedido daoP = new DAOTablaPedido();
+			
+			try 
+			{
+				
+				//////transaccion
+				this.conn = darConexion();
+				daoP.setConn(conn);
+				
+				Long idCliente = cancelarPedido.getIdCliente();
+				Long idPedido = cancelarPedido.getIdPedido();
+				Long idProducto = cancelarPedido.getIdProducto();
+				
+				Pedido pedidoAct = daoP.buscarPedidoPorId(idPedido);
+				pedidoAct.setIdPostre(0);
+				recalcularPedido(pedidoAct);
+									
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoP.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+		}
 		
 		
+		
+		
+		
+		
+		
+public void cancelarPedidoAcompaniamiento(CancelarPedido cancelarPedido) throws Exception {
+			
+			DAOTablaPedido daoP = new DAOTablaPedido();
+			
+			try 
+			{
+				
+				//////transaccion
+				this.conn = darConexion();
+				daoP.setConn(conn);
+				
+				Long idCliente = cancelarPedido.getIdCliente();
+				Long idPedido = cancelarPedido.getIdPedido();
+				Long idProducto = cancelarPedido.getIdProducto();
+				
+				Pedido pedidoAct = daoP.buscarPedidoPorId(idPedido);
+				pedidoAct.setIdAcomp(0);
+				recalcularPedido(pedidoAct);
+									
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoP.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+		}
+		
+		
+		
+		
+		
+public void cancelarPedidoEntrada(CancelarPedido cancelarPedido) throws Exception {
+	
+	DAOTablaPedido daoP = new DAOTablaPedido();
+	
+	try 
+	{
+		
+		//////transaccion
+		this.conn = darConexion();
+		daoP.setConn(conn);
+		
+		Long idCliente = cancelarPedido.getIdCliente();
+		Long idPedido = cancelarPedido.getIdPedido();
+		Long idProducto = cancelarPedido.getIdProducto();
+		
+		Pedido pedidoAct = daoP.buscarPedidoPorId(idPedido);
+		pedidoAct.setIdEntrada(0);
+		recalcularPedido(pedidoAct);
+							
+
+	} catch (SQLException e) {
+		System.err.println("SQLException:" + e.getMessage());
+		e.printStackTrace();
+		throw e;
+	} catch (Exception e) {
+		System.err.println("GeneralException:" + e.getMessage());
+		e.printStackTrace();
+		throw e;
+	} finally {
+		try {
+			daoP.cerrarRecursos();
+			if(this.conn!=null)
+				this.conn.close();
+		} catch (SQLException exception) {
+			System.err.println("SQLException closing resources:" + exception.getMessage());
+			exception.printStackTrace();
+			throw exception;
+		}
+	}
+}
+		
+
+
+
+
+public void cancelarPedidoBebida(CancelarPedido cancelarPedido) throws Exception {
+	
+	DAOTablaPedido daoP = new DAOTablaPedido();
+	
+	try 
+	{
+		
+		//////transaccion
+		this.conn = darConexion();
+		daoP.setConn(conn);
+		
+		Long idCliente = cancelarPedido.getIdCliente();
+		Long idPedido = cancelarPedido.getIdPedido();
+		Long idProducto = cancelarPedido.getIdProducto();
+		
+		Pedido pedidoAct = daoP.buscarPedidoPorId(idPedido);
+		pedidoAct.setIdBebida(0);
+		recalcularPedido(pedidoAct);
+							
+
+	} catch (SQLException e) {
+		System.err.println("SQLException:" + e.getMessage());
+		e.printStackTrace();
+		throw e;
+	} catch (Exception e) {
+		System.err.println("GeneralException:" + e.getMessage());
+		e.printStackTrace();
+		throw e;
+	} finally {
+		try {
+			daoP.cerrarRecursos();
+			if(this.conn!=null)
+				this.conn.close();
+		} catch (SQLException exception) {
+			System.err.println("SQLException closing resources:" + exception.getMessage());
+			exception.printStackTrace();
+			throw exception;
+		}
+	}
+}
+
+
+public void cancelarPedidoPlatoFuerte(CancelarPedido cancelarPedido) throws Exception {
+	
+	DAOTablaPedido daoP = new DAOTablaPedido();
+	
+	try 
+	{
+		
+		//////transaccion
+		this.conn = darConexion();
+		daoP.setConn(conn);
+		
+		Long idCliente = cancelarPedido.getIdCliente();
+		Long idPedido = cancelarPedido.getIdPedido();
+		Long idProducto = cancelarPedido.getIdProducto();
+		
+		Pedido pedidoAct = daoP.buscarPedidoPorId(idPedido);
+		pedidoAct.setIdPlato(0);
+		recalcularPedido(pedidoAct);
+							
+
+	} catch (SQLException e) {
+		System.err.println("SQLException:" + e.getMessage());
+		e.printStackTrace();
+		throw e;
+	} catch (Exception e) {
+		System.err.println("GeneralException:" + e.getMessage());
+		e.printStackTrace();
+		throw e;
+	} finally {
+		try {
+			daoP.cerrarRecursos();
+			if(this.conn!=null)
+				this.conn.close();
+		} catch (SQLException exception) {
+			System.err.println("SQLException closing resources:" + exception.getMessage());
+			exception.printStackTrace();
+			throw exception;
+		}
+	}
+}
+		
+		
+		
+		
+		//Auxiliar RF17
+				private void recalcularPedido(Pedido pedido) throws Exception {
+					DAOTablaPedido daoP = new DAOTablaPedido();
+					
+					try 
+					{
+						//////transaccion
+						this.conn = darConexion();
+						daoP.setConn(conn);
+					
+						
+						Pedido pedidoActual = pedido;
+						
+						Long id = pedidoActual.getId();
+						Long idUsuario = pedidoActual.getIdUsuario();
+						Integer mesa = pedidoActual.getMesa();
+						Double costo = pedidoActual.getCosto();
+						Long idEntrada = pedidoActual.getIdEntrada();
+						Long idAcompani = pedidoActual.getIdAcomp();
+						Long idPlato = pedidoActual.getIdPlato();
+						Long idBebida = pedidoActual.getIdBebida();
+						Long idPostre = pedidoActual.getIdPostre();
+						Long fecha = pedidoActual.getFecha();
+						String estado = pedidoActual.getEstado();
+						Long idRestaurante = pedidoActual.getIdRestaurante();
+						
+						
+		 //Actualizo las cantidades de los productos y agrego el pedido				
+								//costo Final
+						
+						Double entradaCos = (double) 0;
+						Double acompCos = (double) 0;
+						Double platoCos = (double) 0;
+						Double bebCos = (double) 0;
+						Double postreCos = (double) 0;
+						
+						if(idEntrada != 0 && idEntrada !=null ) entradaCos = buscarEntradaPorId(idEntrada).getPrecioProd();
+						if(idAcompani != 0 && idAcompani !=null ) acompCos = buscarAcompaniamientoPorId(idAcompani).getPrecioProd();
+						if(idPlato != 0 && idPlato !=null ) platoCos = buscarPlatoFuerteId(idPlato).getPrecioProd();
+						if(idBebida != 0 && idBebida !=null ) bebCos = buscarBebidaPorId(idBebida).getPrecioProd();
+						if(idPostre != 0 && idPostre !=null ) postreCos = buscarPostreId(idPostre).getPrecioProd();
+	
+						Double costoFinal = entradaCos+acompCos+platoCos+bebCos+postreCos;
+						
+						
+								
+								Pedido pedidoF = new Pedido(id, idUsuario, mesa, costoFinal, idEntrada, idAcompani, idPlato, idBebida, idPostre, fecha, "PENDIENTE", idRestaurante);
+								updatePedido(pedidoF);
+								
+//								Entrada entradaAct = new Entrada(idEntrada, null, 1, null, null, null, null, null, null, null, null, null, null, null, null);
+//								updateEntradaCantidad(entradaAct);
+//								
+//								Acompaniamiento acompAct = new Acompaniamiento(idAcompani, null, 1, null, null, null, null, null, null, null, null, null, null, null, null);
+//								updateAcompaniemientoCantidad(acompAct);
+//								
+//								PlatoFuerte platoFAct = new PlatoFuerte(idPlato, null, 1, null, null, null, null, null, null, null, null, null, null, null, null);
+//								updateplatoFuerteCantidad(platoFAct);
+//								
+//								Bebida bebidaAct =  new Bebida(idBebida, null, 1, null, null, null, null, null, null, null, null, null, null, null, null);
+//								updateBebidaCantidad(bebidaAct);
+//								
+//								Postre postreAct = new Postre(idPostre, null, 1, null, null, null, null, null, null, null, null, null, null, null, null);
+//								updatePostreCantidad(postreAct);						
+										
+					}
+				catch (SQLException e) {
+						System.err.println("SQLException:" + e.getMessage());
+						e.printStackTrace();
+						throw e;
+					} catch (Exception e) {
+						System.err.println("GeneralException:" + e.getMessage());
+						e.printStackTrace();
+						throw e;
+					} finally {
+						try {
+							daoP.cerrarRecursos();
+							if(this.conn!=null)
+								this.conn.close();
+						} catch (SQLException exception) {
+							System.err.println("SQLException closing resources:" + exception.getMessage());
+							exception.printStackTrace();
+							throw exception;
+						}
+					}
+				}
+		
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				public void deleteVariosPedidos(ArrayList<CancelarPedido> cancelarPedidos) throws Exception {
+					DAOTablaPedido daoPedidos = new DAOTablaPedido();
+					try 
+					{
+						//////transaccion
+						this.conn = darConexion();
+						daoPedidos.setConn(conn);
+						
+						Iterator<CancelarPedido> iterCancelPed = cancelarPedidos.iterator();
+						while(iterCancelPed.hasNext()) {
+							Pedido pedidoAct = buscarPedidoPorId(iterCancelPed.next().getIdPedido());
+							daoPedidos.deletePedido(pedidoAct);						
+						}
+						
+					} catch (SQLException e) {
+						System.err.println("SQLException:" + e.getMessage());
+						e.printStackTrace();
+						throw e;
+					} catch (Exception e) {
+						System.err.println("GeneralException:" + e.getMessage());
+						e.printStackTrace();
+						throw e;
+					} finally {
+						try {
+							daoPedidos.cerrarRecursos();
+							if(this.conn!=null)
+								this.conn.close();
+						} catch (SQLException exception) {
+							System.err.println("SQLException closing resources:" + exception.getMessage());
+							exception.printStackTrace();
+							throw exception;
+						}
+					}
+				}
+				
+				
+				
+				
+				
+				
 		
 		
 		

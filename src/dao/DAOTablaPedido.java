@@ -174,7 +174,7 @@ public class DAOTablaPedido {
 		sql += "ID_POSTRE=" + pedido.getIdPostre()+ ",";
 		sql += "FECHA=" + pedido.getFecha()+ ",";
 		sql += "ESTADO='" + pedido.getEstado()+ "',";
-		sql += "ID_RESTAURANTE" + pedido.getIdRestaurante();
+		sql += "ID_RESTAURANTE=" + pedido.getIdRestaurante();
 		sql += " WHERE ID = " + pedido.getId();
 
 
