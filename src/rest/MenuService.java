@@ -43,9 +43,7 @@ public class MenuService
 	
 	
 	@GET
-//	@Path( "{id: \\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-//	public Response getMenu( @PathParam( "id" ) Long id,@PathParam("idRestaurantesus") Long idRestaurantesus ) throws Exception
 	public Response getMenu( @PathParam("idRestaurantesus") Long idRestaurantesus ) throws Exception
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
