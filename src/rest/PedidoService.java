@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.AbstractAlimento;
 import vos.Pedido;
 
 
@@ -61,6 +62,20 @@ public class PedidoService {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
 		return Response.status(200).entity(pedidos).build();
+	}
+	
+	@GET
+	@Path( "usuario/{id: \\d+}" )
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getPedidosUsuario(@PathParam( "id" ) Long id ) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<AbstractAlimento> alimentos;
+		try {
+			alimentos = tm.darAlimentosPedidosUsuario(id);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(alimentos).build();
 	}
 
 	 /**

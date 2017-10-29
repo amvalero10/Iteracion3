@@ -14,6 +14,7 @@ import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import dao.DAOTablaEntrada;
 import dao.DAOTablaRestaurante;
+import vos.AbstractAlimento;
 import vos.Entrada;
 import vos.Restaurante;
 import vos.Acompaniamiento;
@@ -413,6 +414,75 @@ public class RotondAndesTM {
 			}
 			return pedidos;
 		}
+		
+		public List<AbstractAlimento> darAlimentosPedidosUsuario(Long id) throws Exception {
+			List<AbstractAlimento> alimentos = new ArrayList<AbstractAlimento>();
+			DAOTablaPedido daoPedidos = new DAOTablaPedido();
+			DAOTablaEntrada daoEntrada = new DAOTablaEntrada();
+			DAOTablaBebida daoBebida = new DAOTablaBebida();
+			DAOTablaPostre daoPostre = new DAOTablaPostre();
+			DAOTablaAcompaniamiento daoAcomp = new DAOTablaAcompaniamiento();
+			DAOTablaPlatoFuerte daoPlatoFuerte = new DAOTablaPlatoFuerte();
+			try 
+			{
+				//////transaccion
+				this.conn = darConexion();
+				daoPlatoFuerte.setConn(conn);
+				daoAcomp.setConn(conn);
+				daoPostre.setConn(conn);
+				daoBebida.setConn(conn);
+				daoEntrada.setConn(conn);
+				daoPedidos.setConn(conn);
+				List<Pedido> pedidos = daoPedidos.darPedidosUsuario(id);
+				for (int i = 0; i < pedidos.size(); i++) {
+					if(pedidos.get(i).getIdEntrada()!=0){
+						AbstractAlimento entAct = daoEntrada.buscarEntradaPorId(pedidos.get(i).getIdEntrada());
+						alimentos.add(entAct);
+					}
+					if(pedidos.get(i).getIdBebida()!=0){
+						AbstractAlimento bebAct = daoBebida.buscarBebidaPorId(pedidos.get(i).getIdBebida());
+						alimentos.add(bebAct);
+					}
+					if(pedidos.get(i).getIdPostre()!=0){
+						AbstractAlimento posAct = daoPostre.buscarPostrePorId(pedidos.get(i).getIdPostre());
+						alimentos.add(posAct);
+					}
+					if(pedidos.get(i).getIdAcomp()!=0){
+						AbstractAlimento acoAct = daoAcomp.buscarAcompaniamientoPorId(pedidos.get(i).getIdAcomp());
+						alimentos.add(acoAct);
+					}
+					if(pedidos.get(i).getIdPlato()!=0){
+						AbstractAlimento plaAct = daoPlatoFuerte.buscarPlatoFuertePorId(pedidos.get(i).getIdPlato());
+						alimentos.add(plaAct);
+					}
+				}
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoPedidos.cerrarRecursos();
+					daoEntrada.cerrarRecursos();
+					daoBebida.cerrarRecursos();
+					daoPostre.cerrarRecursos();
+					daoAcomp.cerrarRecursos();
+					daoPlatoFuerte.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+			return alimentos;
+		}
 
 		/**
 		 * Metodo que modela la transaccion que busca el video en la base de datos con el id que entra como parametro.
@@ -549,7 +619,7 @@ public class RotondAndesTM {
 				Boolean entradaEsta = daoEquiv.tieneEquivalenciaBebidaPorId(id1, id2);
 			    pedido = daoPedido.buscarPedidoPorId(id);
 				if(entradaEsta){
-					pedido.setIdEntrada(id2);
+					pedido.setIdBebida(id2);
 					pedido.setId(idN);
 				}
 				daoPedido.addPedido(pedido);
@@ -591,7 +661,7 @@ public class RotondAndesTM {
 				Boolean entradaEsta = daoEquiv.tieneEquivalenciaPostrePorId(id1, id2);
 			    pedido = daoPedido.buscarPedidoPorId(id);
 				if(entradaEsta){
-					pedido.setIdEntrada(id2);
+					pedido.setIdPostre(id2);
 					pedido.setId(idN);
 				}
 				daoPedido.addPedido(pedido);
@@ -633,7 +703,7 @@ public class RotondAndesTM {
 				Boolean entradaEsta = daoEquiv.tieneEquivalenciaAcompPorId(id1, id2);
 			    pedido = daoPedido.buscarPedidoPorId(id);
 				if(entradaEsta){
-					pedido.setIdEntrada(id2);
+					pedido.setIdAcomp(id2);
 					pedido.setId(idN);
 				}
 				daoPedido.addPedido(pedido);
@@ -675,7 +745,7 @@ public class RotondAndesTM {
 				Boolean entradaEsta = daoEquiv.tieneEquivalenciaPlatoPorId(id1, id2);
 			    pedido = daoPedido.buscarPedidoPorId(id);
 				if(entradaEsta){
-					pedido.setIdEntrada(id2);
+					pedido.setIdPlato(id2);
 					pedido.setId(idN);
 				}
 				daoPedido.addPedido(pedido);
