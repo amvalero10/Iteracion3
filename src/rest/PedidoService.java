@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.AbstractAlimento;
 import vos.Pedido;
 
 
@@ -62,6 +63,20 @@ public class PedidoService {
 		}
 		return Response.status(200).entity(pedidos).build();
 	}
+	
+	@GET
+	@Path( "usuario/{id: \\d+}" )
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getPedidosUsuario(@PathParam( "id" ) Long id ) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<AbstractAlimento> alimentos;
+		try {
+			alimentos = tm.darAlimentosPedidosUsuario(id);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(alimentos).build();
+	}
 
 	 /**
      * Metodo que expone servicio REST usando GET que busca el video con el id que entra como parametro
@@ -105,6 +120,82 @@ public class PedidoService {
 		}
 		return Response.status(200).entity(pedido).build();
 	}
+	
+	@POST
+	@Path("/equiventrada/"+"{id: \\d+}/{id1: \\d+}/{id2: \\d+}/{idN: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addPedidoEquivEntrada(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2, @PathParam( "idN" )Long idN) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			Pedido pedido = tm.addPedidoEquivEntrada(id, id1, id2, idN);
+			return Response.status(200).entity(pedido).build();
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+	}
+	
+	@POST
+	@Path("/equivbebida/"+"{id: \\d+}/{id1: \\d+}/{id2: \\d+}/{idN: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addPedidoEquivBebida(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2, @PathParam( "idN" )Long idN) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			Pedido pedido = tm.addPedidoEquivBebida(id, id1, id2, idN);
+			return Response.status(200).entity(pedido).build();
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+	}
+	
+	@POST
+	@Path("/equivpostre/"+"{id: \\d+}/{id1: \\d+}/{id2: \\d+}/{idN: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addPedidoEquivPostre(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2, @PathParam( "idN" )Long idN) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			Pedido pedido = tm.addPedidoEquivPostre(id, id1, id2, idN);
+			return Response.status(200).entity(pedido).build();
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+	}
+	
+	@POST
+	@Path("/equivacomp/"+"{id: \\d+}/{id1: \\d+}/{id2: \\d+}/{idN: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addPedidoEquivAcomp(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2, @PathParam( "idN" )Long idN) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			Pedido pedido = tm.addPedidoEquivAcomp(id, id1, id2, idN);
+			return Response.status(200).entity(pedido).build();
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+	}
+	
+	@POST
+	@Path("/equivplato/"+"{id: \\d+}/{id1: \\d+}/{id2: \\d+}/{idN: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addPedidoEquivPlato(@PathParam( "id" )Long id, @PathParam( "id1" )Long id1,
+			@PathParam( "id2" )Long id2, @PathParam( "idN" )Long idN) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			Pedido pedido = tm.addPedidoEquivPlato(id, id1, id2, idN);
+			return Response.status(200).entity(pedido).build();
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+	}
+	
 	
     /**
      * Metodo que expone servicio REST usando POST que agrega los videos que recibe en Json

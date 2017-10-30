@@ -86,6 +86,34 @@ public class DAOTablaPedido {
 		return pedidos;
 	}
 
+	public ArrayList<Pedido> darPedidosUsuario(Long id) throws SQLException, Exception {
+		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+
+		String sql = "SELECT * FROM PEDIDO WHERE IDUSUARIO =" +id;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id1 = rs.getLong("ID");
+			Long idUsuario = rs.getLong("IDUSUARIO");
+			Integer mesa = rs.getInt("MESA");
+			Double costo = rs.getDouble("COSTO");
+			Long idEntrada = rs.getLong("ID_ENTRADA");
+			Long idAcomp = rs.getLong("ID_ACOMP");
+			Long idPlato = rs.getLong("ID_PLATO");
+			Long idBebida = rs.getLong("ID_BEBIDA");
+			Long idPostre = rs.getLong("ID_POSTRE");
+			Long fecha = rs.getLong("FECHA");
+			String estado = rs.getString("ESTADO");
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			pedidos.add(new Pedido(id1, idUsuario, mesa, costo, idEntrada, idAcomp, idPlato, idBebida, idPostre, fecha, estado, idRestaurante));
+		}
+		return pedidos;
+	}
+
+	
 	/**
 	 * Metodo que busca el pedido con el id que entra como parametro.
 	 * @param id - Id de el pedido a buscar
